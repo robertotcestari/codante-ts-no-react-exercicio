@@ -17,7 +17,7 @@ function App() {
     <main className="w-full min-h-screen " style={{ backgroundColor: bgColor }}>
       <section className="container px-10 py-20 mx-auto text-center">
         <div className="w-full max-w-4xl px-10 py-6 mx-auto bg-white border-2 border-white rounded-lg bg-opacity-15 ">
-          <h1 className="font-bold brightness-50 text-7xl font-display" style={{color: bgColor}}>
+          <h1 className="text-3xl font-bold brightness-50 md:text-7xl font-display " style={{color: bgColor}}>
             Frases Motivacionais
           </h1>
           <button

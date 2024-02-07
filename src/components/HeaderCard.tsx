@@ -1,13 +1,15 @@
+import { useEffect, useRef } from 'react';
 import { fetchRandomColor } from '../lib/services';
+import Button from './Button';
 
 type HeaderCardProps = {
-  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  handleChangeQuoteClick: React.MouseEventHandler<HTMLButtonElement>;
   bgColor: string;
   setBgColor: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function HeaderCard({
-  handleClick,
+  handleChangeQuoteClick,
   bgColor,
   setBgColor,
 }: HeaderCardProps) {
@@ -15,6 +17,12 @@ export default function HeaderCard({
     const newColor = await fetchRandomColor();
     setBgColor(newColor.hex);
   }
+
+  const quoteButtonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    quoteButtonRef?.current?.focus()
+  }, [])
 
   return (
     <div className="w-full max-w-4xl px-10 py-6 mx-auto bg-white border-2 border-white rounded-lg bg-opacity-15 ">
@@ -24,24 +32,20 @@ export default function HeaderCard({
       >
         Frases Motivacionais
       </h1>
-      <button
-        onClick={handleClick}
-        className="px-4 py-2 mt-10 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-      >
-        Me dê uma dose de ânimo
-      </button>
-      <button
-        className="px-4 py-2 mt-10 ml-2 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
-        onClick={handleChangeColorClick}
-      >
-        Trocar a Cor
-      </button>
+      <Button ref={quoteButtonRef} onClick={handleChangeQuoteClick}>Me dê uma dose de ânimo</Button>
+      <Button onClick={handleChangeColorClick}>Trocar a Cor</Button>
       <label
         htmlFor="color-changer"
         className="inline-flex items-center justify-center px-4 py-2 mt-10 ml-2 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded cursor-pointer bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
       >
         <span>Escolha uma cor</span>
-        <input onChange={(e) => setBgColor(e.currentTarget.value)} type="color" name="color-changer" id="color-changer" className='w-0 h-0' />
+        <input
+          onChange={(e) => setBgColor(e.currentTarget.value)}
+          type="color"
+          name="color-changer"
+          id="color-changer"
+          className="w-0 h-0"
+        />
       </label>
     </div>
   );

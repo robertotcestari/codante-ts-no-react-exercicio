@@ -31,11 +31,18 @@ export default function HeaderCard({
         Me dê uma dose de ânimo
       </button>
       <button
-        className="px-4 py-2 mt-10 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+        className="px-4 py-2 mt-10 ml-2 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
         onClick={handleChangeColorClick}
       >
         Trocar a Cor
       </button>
+      <label
+        htmlFor="color-changer"
+        className="inline-flex items-center justify-center px-4 py-2 mt-10 ml-2 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded cursor-pointer bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+      >
+        <span>Escolha uma cor</span>
+        <input onChange={(e) => setBgColor(e.currentTarget.value)} type="color" name="color-changer" id="color-changer" className='w-0 h-0' />
+      </label>
     </div>
   );
 }

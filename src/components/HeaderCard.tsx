@@ -33,7 +33,7 @@ export default function HeaderCard({
         Frases Motivacionais
       </h1>
       <Button ref={quoteButtonRef} onClick={handleChangeQuoteClick}>Me dê uma dose de ânimo</Button>
-      <Button onClick={handleChangeColorClick}>Trocar a Cor</Button>
+      <Button className='ml-2' onClick={handleChangeColorClick}>Trocar a Cor</Button>
       <label
         htmlFor="color-changer"
         className="inline-flex items-center justify-center px-4 py-2 mt-10 ml-2 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded cursor-pointer bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"

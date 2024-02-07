@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { fetchQuote, fetchRandomColor } from './lib/services';
 import QuoteCard from './components/QuoteCard';
+import { Quote } from './lib/types';
 
 function App() {
-  const [quote, setQuote] = useState(null);
+  const [quote, setQuote] = useState<Quote | null>(null);
   const [bgColor, setBgColor] = useState('#666');
 
   async function handleClick() {

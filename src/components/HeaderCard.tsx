@@ -1,28 +1,29 @@
-import { useEffect, useRef } from 'react';
-import { fetchRandomColor } from '../lib/services';
+import { useContext, useEffect, useRef } from 'react';
+import { fetchQuote, fetchRandomColor } from '../lib/services';
 import Button from './Button';
+import context from '../context/context';
 
-type HeaderCardProps = {
-  handleChangeQuoteClick: React.MouseEventHandler<HTMLButtonElement>;
-  bgColor: string;
-  setBgColor: React.Dispatch<React.SetStateAction<string>>;
-};
 
-export default function HeaderCard({
-  handleChangeQuoteClick,
-  bgColor,
-  setBgColor,
-}: HeaderCardProps) {
+export default function HeaderCard() {
+  const { bgColor, setBgColor, setQuote } = useContext(context);
+
+  async function handleChangeQuoteClick() {
+    const quote = await fetchQuote();
+    const color = await fetchRandomColor();
+    setQuote(quote);
+    setBgColor(color.hex);
+  }
+
   async function handleChangeColorClick() {
     const newColor = await fetchRandomColor();
     setBgColor(newColor.hex);
   }
 
-  const quoteButtonRef = useRef<HTMLButtonElement>(null)
+  const quoteButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    quoteButtonRef?.current?.focus()
-  }, [])
+    quoteButtonRef?.current?.focus();
+  }, []);
 
   return (
     <div className="w-full max-w-4xl px-10 py-6 mx-auto bg-white border-2 border-white rounded-lg bg-opacity-15 ">
@@ -32,8 +33,12 @@ export default function HeaderCard({
       >
         Frases Motivacionais
       </h1>
-      <Button ref={quoteButtonRef} onClick={handleChangeQuoteClick}>Me dê uma dose de ânimo</Button>
-      <Button className='ml-2' onClick={handleChangeColorClick}>Trocar a Cor</Button>
+      <Button ref={quoteButtonRef} onClick={handleChangeQuoteClick}>
+        Me dê uma dose de ânimo
+      </Button>
+      <Button className="ml-2" onClick={handleChangeColorClick}>
+        Trocar a Cor
+      </Button>
       <label
         htmlFor="color-changer"
         className="inline-flex items-center justify-center px-4 py-2 mt-10 ml-2 font-bold text-white bg-transparent bg-gray-800 border-2 border-white rounded cursor-pointer bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
